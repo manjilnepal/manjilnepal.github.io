@@ -1,68 +1,23 @@
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAUi-qNiXg7eU0.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAXC-qNiXg7Q.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_FQftx9897sxZ.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_Gwftx9897g.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+/* Fonts loaded via <link> in HTML for non-blocking parallel fetch */
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ── Typography ── */
 a {
   color: #1772d0;
   text-decoration: none;
@@ -71,72 +26,232 @@ a {
 a:focus,
 a:hover {
   color: #f09228;
-  text-decoration: none;
-}
-
-body,
-td,
-th,
-tr,
-p,
-a {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-}
-
-strong {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
 }
 
 h2 {
-  margin: 0;
   font-weight: normal;
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 22px;
+  margin: 0;
+}
+
+strong {
+  font-size: 14px;
+}
+
+.name {
+  padding-top: 12px;
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: #222;
+}
+
+/* ── Layout ── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 0 24px;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 8px;
+}
+
+.header-info {
+  flex: 1;
+}
+
+.header-info > p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.header-photo {
+  flex-shrink: 0;
+  width: 28%;
+  max-width: 200px;
+}
+
+.header-photo img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  border: 3px solid #e5e5e5;
+}
+
+.links {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* ── Sections ── */
+.section {
+  padding: 20px 0 8px;
+}
+
+.section h2 {
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #eee;
+}
+
+/* ── Entry rows (experience, research, etc.) ── */
+.entry {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  align-items: center;
+}
+
+.entry-img {
+  flex-shrink: 0;
+  width: 18%;
+  text-align: center;
+}
+
+.entry-img img {
+  max-width: 120px;
+  height: auto;
+}
+
+.entry-body {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.entry-title {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.entry-date {
+  font-size: 13px;
+  color: #666;
+  margin: 2px 0 6px;
+}
+
+/* ── Paper cards ── */
+.paper {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  align-items: flex-start;
+}
+
+.paper-img {
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.paper-img img {
+  width: 100%;
+  display: block;
+}
+
+.paper-body {
+  flex: 1;
 }
 
 .papertitle {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 700;
 }
 
-.name {
-  padding-top: 20px;
-  margin: 0;
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 32px;
+.oral {
+  color: red;
+  font-weight: 700;
 }
 
-.one {
-  width: 160px;
-  height: 160px;
-  position: relative;
+/* ── Research interest tags ── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 8px 0 4px;
 }
 
-.two {
-  width: 160px;
-  height: 160px;
-  position: absolute;
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  background: #f3f3f3;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  letter-spacing: 0.2px;
 }
 
-.fade {
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
+/* ── Collapsible abstracts ── */
+details {
+  margin-top: 6px;
 }
 
-span.highlight {
-  background-color: #ffffd0;
+details summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: #1772d0;
+  font-weight: 600;
+  user-select: none;
 }
 
-.colored-box {
-    color: black;
-    padding: 20px;
-    display: inline-block;
-    border-radius: 10px;
+details summary:hover {
+  color: #f09228;
+}
+
+details p {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #444;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: right;
+  font-size: small;
+  padding: 16px 0;
+  color: #999;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .header-photo {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .entry {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .entry-img {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .paper {
+    flex-direction: column;
+  }
+
+  .paper-img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto;
+  }
 }
