@@ -216,9 +216,22 @@ details p {
 
 /* ── Footer ── */
 .footer {
-  text-align: right;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 24px 0 16px;
+  border-top: 1px solid #eee;
+  margin-top: 8px;
+}
+
+.footer-flag img {
+  display: block;
+  min-width: 100px;
+  min-height: 20px;
+}
+
+.footer-credit {
   font-size: small;
-  padding: 16px 0;
   color: #999;
 }
 
