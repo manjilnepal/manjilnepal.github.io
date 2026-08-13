@@ -1,5 +1,32 @@
 /* Fonts loaded via <link> in HTML for non-blocking parallel fetch */
 
+/* ── Design tokens ── */
+:root {
+  --text: #2b2b2b;
+  --text-muted: #5a5a5a;
+  --text-faint: #888;
+  --link: #1772d0;
+  --link-hover: #f09228;
+  --rule: #e5e5e5;
+  --rule-soft: #eee;
+  --surface: #f5f5f5;
+  --bg: #fff;
+}
+
+/* Dark theme applies only on explicit opt-in via the toggle.
+   Light is the default regardless of system preference. */
+:root[data-theme="dark"] {
+  --text: #dcdcdc;
+  --text-muted: #a8a8a8;
+  --text-faint: #7d7d7d;
+  --link: #6bb0f5;
+  --link-hover: #f0a95c;
+  --rule: #2e2e2e;
+  --rule-soft: #262626;
+  --surface: #1c1c1c;
+  --bg: #131313;
+}
+
 /* ── Reset & Base ── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -7,64 +34,139 @@
   padding: 0;
 }
 
+/* ── Theme toggle ── */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--text-faint);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Show the icon for the theme you'd switch TO */
+.theme-toggle .icon-moon { display: block; }
+.theme-toggle .icon-sun { display: none; }
+
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #333;
-  max-width: 800px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  max-width: 840px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 20px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* ── Typography ── */
 a {
-  color: #1772d0;
+  color: var(--link);
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 a:focus,
 a:hover {
-  color: #f09228;
+  color: var(--link-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 h2 {
-  font-weight: normal;
-  font-size: 22px;
+  font-weight: 700;
+  font-size: 20px;
   margin: 0;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
 }
 
 strong {
-  font-size: 14px;
+  font-size: inherit;
 }
 
 .name {
   padding-top: 12px;
-  margin: 0 0 6px;
-  font-size: 28px;
+  margin: 0 0 10px;
+  /* Scales with viewport so the Devanagari half never collides
+     with the profile photo at mid widths. */
+  font-size: clamp(26px, 4.1vw, 35px);
   font-weight: 700;
   text-align: center;
   letter-spacing: -0.5px;
-  color: #222;
+  line-height: 1.2;
+  text-wrap: balance;
+  color: var(--text);
 }
 
 /* ── Layout ── */
 .header {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 32px 0 24px;
-  border-bottom: 1px solid #e5e5e5;
+  gap: 28px;
+  padding: 36px 0 28px;
+  border-bottom: 1px solid var(--rule);
   margin-bottom: 8px;
 }
 
 .header-info {
   flex: 1;
+  min-width: 0;
 }
 
-.header-info > p {
+/* :not(.name) so this never overrides the name's display size —
+   it is more specific than .name and would otherwise win. */
+.header-info > p:not(.name) {
   text-align: center;
-  color: #555;
+  color: var(--text-muted);
+  font-size: 16px;
   margin-bottom: 4px;
 }
 
@@ -76,34 +178,36 @@ strong {
 
 .header-photo img {
   width: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
   display: block;
-  border: 3px solid #e5e5e5;
+  border: 3px solid var(--rule);
 }
 
 .links {
   text-align: center;
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 /* ── Sections ── */
 .section {
-  padding: 20px 0 8px;
+  padding: 26px 0 8px;
 }
 
 .section h2 {
-  margin-bottom: 12px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #eee;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule-soft);
 }
 
 /* ── Entry rows (experience, research, etc.) ── */
 .entry {
   display: flex;
-  gap: 16px;
-  padding: 12px 0;
+  gap: 20px;
+  padding: 16px 0;
   align-items: center;
 }
 
@@ -120,32 +224,163 @@ strong {
 
 .entry-body {
   flex: 1;
-  line-height: 1.4;
+  min-width: 0;
+  line-height: 1.55;
+  font-size: 16px;
+  /* Shared vertical axis for the org marker, the timeline rail and
+     every role dot. Change this one value to move them all together. */
+  --axis: 6px;
 }
 
 .entry-title {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Organization heading. Everything in the entry hangs off one vertical
+   axis, --axis, measured from the entry-body content edge. Markers are
+   centred on it with translateX(-50%) rather than hand-computed offsets,
+   so sizes can change without breaking alignment. */
+.entry-body > .entry-title {
+  position: relative;
+  padding-left: calc(var(--axis) + 12px);
+}
+
+.entry-body > .entry-title::before {
+  content: "";
+  position: absolute;
+  left: var(--axis);
+  top: 0.62em;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.entry-date {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 3px 0 6px;
+}
+
+/* ── Timeline (promotion progression) ── */
+/* Rail centred on --axis. Drawn as a pseudo-element rather than a
+   border so it can start and stop at the dot centres — a border would
+   span the full box and overshoot past the last dot. */
+.entry-timeline {
+  position: relative;
+  margin: 4px 0 12px calc(var(--axis) - 1px);
+  padding-left: 11px;
+}
+
+.entry-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 2px;
+  background: var(--rule);
+  /* Spans exactly first-dot centre to last-dot centre. The bottom
+     offset clears the last item's remaining line box below its dot. */
+  top: 0.62em;
+  bottom: calc(0.62em + 5px);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 2px 0 10px 0;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Single-role entries: no progression to trace, so no rail at all. */
+.entry-timeline:has(.timeline-item:only-child)::before {
+  display: none;
+}
+
+.entry-timeline:has(.timeline-item:only-child) {
+  margin-bottom: 8px;
+}
+
+/* Centred on the rail: the item's content edge sits 11px past the
+   timeline's padding edge, and the 2px rail straddles that edge, so
+   its centre is 10px back. translate(-50%) centres the dot on it. */
+.timeline-dot {
+  position: absolute;
+  left: -10px;
+  top: 0.62em;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--text-faint);
+}
+
+.timeline-content {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.timeline-content .entry-title {
   font-size: 17px;
   font-weight: 700;
 }
 
-.entry-date {
+.timeline-content .entry-title::after {
+  content: "·";
+  margin: 0 7px;
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+.timeline-content .entry-date {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Secondary detail under a role, e.g. the course a TA taught. */
+.timeline-note {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-top: 1px;
+}
+
+/* ── Project meta line ── */
+.project-meta {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.project-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 4px;
+}
+
+.project-tags .tag {
   font-size: 13px;
-  color: #666;
-  margin: 2px 0 6px;
+  padding: 2px 8px;
 }
 
 /* ── Paper cards ── */
 .paper {
   display: flex;
-  gap: 16px;
-  padding: 12px 0;
+  gap: 20px;
+  padding: 16px 0;
   align-items: flex-start;
 }
 
 .paper-img {
   flex-shrink: 0;
-  width: 160px;
-  height: 160px;
+  width: 170px;
   position: relative;
   overflow: hidden;
 }
@@ -153,93 +388,171 @@ strong {
 .paper-img img {
   width: 100%;
   display: block;
+  border-radius: 4px;
 }
 
 .paper-body {
   flex: 1;
+  min-width: 0;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 .papertitle {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 1.35;
+}
+
+.paper-body em {
+  color: var(--text-muted);
 }
 
 .oral {
-  color: red;
+  color: #d33;
   font-weight: 700;
+}
+
+/* Author list: make own name stand out without shouting */
+.paper-body > strong {
+  color: var(--text);
 }
 
 /* ── Research interest tags ── */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 7px;
   justify-content: center;
-  margin: 8px 0 4px;
+  margin: 10px 0 4px;
 }
 
 .tag {
   display: inline-block;
-  padding: 3px 10px;
-  font-size: 11px;
+  padding: 3px 11px;
+  font-size: 13px;
   font-weight: 600;
-  color: #555;
-  background: #f3f3f3;
-  border: 1px solid #ddd;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--rule);
   border-radius: 4px;
   letter-spacing: 0.2px;
 }
 
 /* ── Collapsible abstracts ── */
 details {
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 details summary {
   cursor: pointer;
-  font-size: 13px;
-  color: #1772d0;
+  font-size: 14px;
+  color: var(--text-muted);
   font-weight: 600;
   user-select: none;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: "+";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 15px;
+  line-height: 1;
+  border: 1.5px solid var(--rule);
+  border-radius: 3px;
+  color: var(--text-muted);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+details[open] summary::before {
+  content: "−";
 }
 
 details summary:hover {
-  color: #f09228;
+  color: var(--text);
+}
+
+details summary:hover::before {
+  border-color: var(--text-faint);
+  color: var(--text);
 }
 
 details p {
-  margin-top: 6px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #444;
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  text-align: justify;
+  hyphens: auto;
 }
 
 /* ── Footer ── */
 .footer {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 24px 0 16px;
-  border-top: 1px solid #eee;
-  margin-top: 8px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 0 24px;
+  border-top: 1px solid var(--rule-soft);
+  margin-top: 20px;
+}
+
+.footer-flag {
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.footer-flag:hover {
+  opacity: 1;
 }
 
 .footer-flag img {
   display: block;
-  min-width: 100px;
-  min-height: 20px;
+  border-radius: 4px;
+}
+
+/* The counter image is served with a baked-in white background, so it
+   can't follow the theme — dim it instead of showing a white block. */
+:root[data-theme="dark"] .footer-flag {
+  opacity: 0.6;
+}
+
+:root[data-theme="dark"] .footer-flag:hover {
+  opacity: 0.85;
 }
 
 .footer-credit {
-  font-size: small;
-  color: #999;
+  font-size: 13px;
+  color: var(--text-faint);
 }
 
 /* ── Responsive ── */
 @media (max-width: 600px) {
+  body {
+    font-size: 16px;
+    padding: 0 16px;
+  }
+
+  .name {
+    font-size: 25px;
+  }
+
   .header {
     flex-direction: column-reverse;
     text-align: center;
+    gap: 20px;
   }
 
   .header-photo {
@@ -257,14 +570,55 @@ details p {
     margin: 0 auto;
   }
 
+  .entry-timeline {
+    text-align: left;
+    display: inline-block;
+  }
+
+  /* Centred layout: drop the marker entirely. A hanging gutter has
+     nothing to hang from once the text is centred. */
+  .entry-body > .entry-title {
+    padding-left: 0;
+  }
+
+  .entry-body > .entry-title::before {
+    display: none;
+  }
+
   .paper {
     flex-direction: column;
   }
 
   .paper-img {
     width: 100%;
-    max-width: 200px;
+    max-width: 220px;
     height: auto;
     margin: 0 auto;
+  }
+
+  details p {
+    text-align: left;
+  }
+}
+
+/* ── Print (for CV-style printing) ── */
+@media print {
+  body {
+    max-width: none;
+    font-size: 11pt;
+    color: #000;
+  }
+
+  a {
+    color: #000;
+  }
+
+  details {
+    display: none;
+  }
+
+  .footer-flag,
+  .theme-toggle {
+    display: none;
   }
 }
