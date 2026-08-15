@@ -1,30 +1,36 @@
 /* Fonts loaded via <link> in HTML for non-blocking parallel fetch */
 
-/* ── Design tokens ── */
+/* ── Design tokens ──
+   Palette derived from the oil-portrait in gallery/dp_paint.png — its ivory
+   ground (#e8ddc8), the charcoal of the suit (#343434) and the ochre of the
+   skin midtones (#c98d4e) — held back to a warm cast rather than a full
+   tint, so the page reads as paper rather than as coloured stock. */
 :root {
-  --text: #2b2b2b;
-  --text-muted: #5a5a5a;
-  --text-faint: #888;
-  --link: #1772d0;
-  --link-hover: #f09228;
-  --rule: #e5e5e5;
-  --rule-soft: #eee;
-  --surface: #f5f5f5;
-  --bg: #fff;
+  --text: #2a2724;
+  --text-muted: #625a51;
+  --text-faint: #776e63;
+  --link: #7d5426;
+  --link-hover: #a4682a;
+  --rule: #e7e0d4;
+  --rule-soft: #efeae0;
+  --surface: #f7f3ec;
+  --bg: #fdfbf7;
+  --accent-strong: #a1402a;
 }
 
 /* Dark theme applies only on explicit opt-in via the toggle.
    Light is the default regardless of system preference. */
 :root[data-theme="dark"] {
-  --text: #dcdcdc;
-  --text-muted: #a8a8a8;
-  --text-faint: #7d7d7d;
-  --link: #6bb0f5;
-  --link-hover: #f0a95c;
-  --rule: #2e2e2e;
-  --rule-soft: #262626;
-  --surface: #1c1c1c;
-  --bg: #131313;
+  --text: #e8e3da;
+  --text-muted: #a9a196;
+  --text-faint: #8b8378;
+  --link: #d5a771;
+  --link-hover: #ecc699;
+  --rule: #34312d;
+  --rule-soft: #2b2825;
+  --surface: #232120;
+  --bg: #1a1918;
+  --accent-strong: #e08063;
 }
 
 /* ── Reset & Base ── */
@@ -35,13 +41,120 @@
 }
 
 /* ── Theme toggle ── */
-.theme-toggle {
+/* Fixed corner stack holding the page-level controls. Individual buttons
+   are static within it, so adding another does not need new coordinates. */
+.controls {
   position: fixed;
   top: 16px;
   right: 16px;
   z-index: 10;
-  width: 38px;
-  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Markdown view (AI mode) ── */
+/* Deliberately unstyled-looking: monospace source, wrapped rather than
+   scrolled, so it reads as the page's underlying text. */
+.md-view {
+  margin: 0;
+  padding: 40px 0 8px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: var(--text-muted);
+}
+
+.md-view[hidden] {
+  display: none;
+}
+
+/* ── Human / AI voice toggle ── */
+/* Reads as one pill: label and track share a dark capsule, matching the
+   theme toggle's height so the two controls sit on a common baseline. */
+.voice-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 5px 0 11px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  color: #f4f1ec;
+  background: #191817;
+  border: 1px solid #191817;
+  border-radius: 999px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+:root[data-theme="dark"] .voice-toggle {
+  color: #1a1918;
+  background: #e8e3da;
+  border-color: #e8e3da;
+}
+
+.voice-toggle:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
+.voice-label {
+  /* Both words occupy the same box, so the pill does not resize on toggle
+     and the track never shifts sideways. */
+  display: inline-grid;
+  place-items: center;
+  min-width: 5ch;
+}
+
+.voice-track {
+  position: relative;
+  width: 34px;
+  height: 19px;
+  border-radius: 999px;
+  background: #4a4744;
+  transition: background 0.2s ease;
+}
+
+:root[data-theme="dark"] .voice-track {
+  background: #b3aca1;
+}
+
+.voice-thumb {
+  position: absolute;
+  top: 2.5px;
+  left: 2.5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fdfbf7;
+  transition: transform 0.2s ease;
+}
+
+/* Checked = AI voice: thumb travels the track's inner width. */
+.voice-toggle[aria-checked="true"] .voice-track {
+  background: var(--link);
+}
+
+.voice-toggle[aria-checked="true"] .voice-thumb {
+  transform: translateX(15px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .voice-thumb,
+  .voice-track {
+    transition: none;
+  }
+}
+
+.theme-toggle {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,16 +162,29 @@
   font: inherit;
   line-height: 1;
   cursor: pointer;
-  color: var(--text-muted);
-  background: var(--bg);
-  border: 1px solid var(--rule);
+  /* Same capsule colours as the voice toggle so the pair reads as one
+     control set; the icon inverts with it to stay legible. */
+  color: #f4f1ec;
+  background: #191817;
+  border: 1px solid #191817;
   border-radius: 50%;
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
+:root[data-theme="dark"] .theme-toggle {
+  color: #1a1918;
+  background: #e8e3da;
+  border-color: #e8e3da;
+}
+
 .theme-toggle:hover {
-  color: var(--text);
-  border-color: var(--text-faint);
+  background: #2b2927;
+  border-color: #2b2927;
+}
+
+:root[data-theme="dark"] .theme-toggle:hover {
+  background: #f4f1ec;
+  border-color: #f4f1ec;
 }
 
 .theme-toggle:focus-visible {
@@ -67,8 +193,8 @@
 }
 
 .theme-toggle svg {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   display: block;
   fill: none;
   stroke: currentColor;
@@ -176,13 +302,26 @@ strong {
   max-width: 200px;
 }
 
+/* Ring is drawn with box-shadow rather than a border so it sits outside the
+   image edge — a border would crop into the portrait at the rounding. */
 .header-photo img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
   display: block;
-  border: 3px solid var(--rule);
+  box-shadow: 0 0 0 1px var(--rule), 0 0 0 6px var(--bg), 0 0 0 7px var(--rule-soft);
+  transition: box-shadow 0.25s ease;
+}
+
+.header-photo a:hover img {
+  box-shadow: 0 0 0 1px var(--link), 0 0 0 6px var(--bg), 0 0 0 7px var(--rule);
+}
+
+.header-photo a:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 6px;
+  border-radius: 50%;
 }
 
 .links {
@@ -197,23 +336,59 @@ strong {
   padding: 26px 0 8px;
 }
 
+/* Hairline runs the full column for structure; the short ochre dash over it
+   marks the label itself, so the eye catches the heading before the rule. */
 .section h2 {
+  position: relative;
   margin-bottom: 14px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--rule-soft);
 }
 
+/* Sits beside a heading as a quiet aside — steps down to body weight and
+   size so it reads as an annotation rather than part of the label. */
+.h2-note {
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+.section h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 34px;
+  height: 2px;
+  background: var(--link);
+  opacity: 0.55;
+}
+
+/* ── Lede paragraph ── */
+/* Standing prose under a heading. Slightly larger than body copy with a
+   capped measure, so it reads as an intro rather than an entry body. */
+.lede {
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 68ch;
+  color: var(--text);
+}
+
 /* ── Entry rows (experience, research, etc.) ── */
+/* Top-aligned rather than centred: entries range from one role to several,
+   and centring leaves the logo floating mid-block on the tall ones. The
+   small top padding drops it onto the org title's optical centre. */
 .entry {
   display: flex;
   gap: 20px;
   padding: 16px 0;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .entry-img {
   flex-shrink: 0;
   width: 18%;
+  padding-top: 4px;
   text-align: center;
 }
 
@@ -320,6 +495,15 @@ strong {
   border: 2px solid var(--text-faint);
 }
 
+/* Roles are listed newest-first, so filling the first dot marks where the
+   progression currently stands. Only meaningful when there is a progression
+   to trace — on single-role entries the rail is hidden and a filled dot
+   would just be a stray mark. */
+.entry-timeline:not(:has(.timeline-item:only-child)) .timeline-item:first-child .timeline-dot {
+  background: var(--link);
+  border-color: var(--link);
+}
+
 .timeline-content {
   display: flex;
   align-items: baseline;
@@ -350,6 +534,49 @@ strong {
   color: var(--text-muted);
   line-height: 1.45;
   margin-top: 1px;
+}
+
+/* ── Education ── */
+/* Deliberately logo-less and rail-less: two degrees need no progression
+   to trace, so each is just school / degree · years / department. */
+.edu {
+  padding: 12px 0;
+  line-height: 1.55;
+}
+
+.edu:first-of-type {
+  padding-top: 4px;
+}
+
+.edu-school {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.edu-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+.edu-date {
+  font-size: 15px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.edu-degree::after {
+  content: "·";
+  margin: 0 7px;
+  color: var(--text-faint);
+}
+
+.edu-dept {
+  font-size: 15px;
+  color: var(--text-muted);
 }
 
 /* ── Project meta line ── */
@@ -389,6 +616,12 @@ strong {
   width: 100%;
   display: block;
   border-radius: 4px;
+  border: 1px solid var(--rule-soft);
+  transition: border-color 0.2s ease;
+}
+
+.paper:hover .paper-img img {
+  border-color: var(--rule);
 }
 
 .paper-body {
@@ -409,7 +642,7 @@ strong {
 }
 
 .oral {
-  color: #d33;
+  color: var(--accent-strong);
   font-weight: 700;
 }
 
@@ -435,7 +668,7 @@ strong {
   color: var(--text-muted);
   background: var(--surface);
   border: 1px solid var(--rule);
-  border-radius: 4px;
+  border-radius: 100px;
   letter-spacing: 0.2px;
 }
 
@@ -471,9 +704,18 @@ details summary::before {
   line-height: 1;
   border: 1.5px solid var(--rule);
   border-radius: 3px;
+  background: var(--surface);
   color: var(--text-muted);
   font-weight: 400;
   flex-shrink: 0;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+details summary:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 3px;
+  color: var(--text);
 }
 
 details[open] summary::before {
@@ -567,6 +809,7 @@ details p {
 
   .entry-img {
     width: 60%;
+    padding-top: 0;
     margin: 0 auto;
   }
 

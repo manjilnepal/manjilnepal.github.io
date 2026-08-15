@@ -7,7 +7,7 @@
   <meta name="description"
     content="Manjil Nepal – Researcher in Federated Learning, Multimodal Deep Learning, and Computer Vision.">
   <meta name="author" content="Manjil Nepal">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#fdfbf7">
   <meta property="og:type" content="profile">
   <meta property="og:title" content="Manjil Nepal">
   <meta property="og:description"
@@ -33,30 +33,140 @@
 
 <body>
 
-  <button class="theme-toggle" type="button" id="theme-toggle"
-          aria-label="Switch to dark theme" title="Switch to dark theme">
-    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
-    </svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="4.5"></circle>
-      <path d="M12 1.8v2.4M12 19.8v2.4M4.0 4.0l1.7 1.7M18.3 18.3l1.7 1.7M1.8 12h2.4M19.8 12h2.4M4.0 20.0l1.7-1.7M18.3 5.7l1.7-1.7"></path>
-    </svg>
-  </button>
+  <div class="controls">
+    <button class="voice-toggle" type="button" id="voice-toggle"
+            role="switch" aria-checked="false" aria-controls="md-view"
+            title="View this page as Markdown">
+      <span class="voice-label" id="voice-label">Human</span>
+      <span class="voice-track" aria-hidden="true"><span class="voice-thumb"></span></span>
+    </button>
+
+    <button class="theme-toggle" type="button" id="theme-toggle"
+            aria-label="Switch to dark theme" title="Switch to dark theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4.5"></circle>
+        <path d="M12 1.8v2.4M12 19.8v2.4M4.0 4.0l1.7 1.7M18.3 18.3l1.7 1.7M1.8 12h2.4M19.8 12h2.4M4.0 20.0l1.7-1.7M18.3 5.7l1.7-1.7"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ── Markdown view (AI mode) ── -->
+  <!-- Mirrors the rendered page as plain source. Hidden by default; the
+       voice toggle swaps it in and hides .human-view. -->
+  <pre class="md-view" id="md-view" hidden># Manjil Nepal
+
+Research Associate, DREAM:Lab, Indian Institute of Science
+Email: manjil.nepal03 [AT] gmail.com
+Scholar: https://scholar.google.com/citations?user=DzORCCkAAAAJ&amp;hl=en
+GitHub: https://github.com/manjilnepal/
+Twitter: https://x.com/manjilnp
+CV: data/my_cv.pdf
+
+Keywords: Federated Learning, MLSys, Computer Vision
+
+## Research Interests
+
+I build systems for distributed machine learning, training AI models across
+many machines rather than one. My work sits where the learning meets the
+machine: hardware ranging from edge devices to server-grade clusters, and
+modalities spanning vision to natural language.
+
+## Experience
+
+### Indian Institute of Science, Bengaluru
+- Teaching Assistant (Fall 2026) — DS 252: Introduction to Cloud Computing
+- Project Associate (Jul 2026-Present)
+- Research Intern (Feb 2026-Jul 2026)
+
+Advisor: [Prof. Yogesh Simmhan](https://cds.iisc.ac.in/faculty/simmhan/)
+Research Area: Federated Learning and MLSys
+
+### Agency for Science, Technology and Research (A*STAR), Singapore
+- Research Intern (Aug 2025-Jan 2026)
+
+Advisor: Dr. Renuga Kanagavelu (Senior Research Scientist)
+Research Area: Federated Learning (Finance), Generative Models (Medical Imaging)
+
+### Indian Institute of Technology (ISM) Dhanbad, India
+- Summer Research Intern (May 2025-July 2025)
+
+Advisor: [Prof. Tamoghna Ojha](https://tamoghnaojha.github.io/)
+Research Area: Federated Learning for Resource Constrained IoT Devices
+
+### Scientific Reports
+- Peer Reviewer (June 2025-July 2026)
+
+## Publications
+
+[Google Scholar Profile](https://scholar.google.com/citations?user=DzORCCkAAAAJ&amp;hl=en)
+
+### M^2FedAQI: Multimodal Federated Learning for Air Quality Prediction on Heterogeneous Edge Devices
+**Manjil Nepal**, Kimsie Phan, Tamoghna Ojha, Aritra Dutta, M Krishna Siva Prasad
+*arXiv preprint*, 2026
+- [Paper](https://arxiv.org/abs/2605.16375)
+
+### DPxFin: Adaptive Differential Privacy for Anti-Money Laundering Detection via Reputation-Weighted Federated Learning
+Renuga Kanagavelu, **Manjil Nepal**, Ning Peiyan, Cai Kangning, Xu Jiming,
+Fei Gao, Yong Liu, Goh Siow Mong Rick and Qingsong Wei
+*ACM International Conference on AI in Finance (ICAIF) - Workshop*, 2025
+- [Paper](https://arxiv.org/pdf/2603.19314)
+
+## Achievements
+
+### 1st Place in the TCSC SCALE Challenge
+*26th IEEE International Symposium on Cluster, Cloud, and Internet Computing*, 2026
+- [Announcement](https://www.iisc.ac.in/events/iisc-team-wins-ieee-tcsc-scale-challenge-2026-for-city-scale-real-time-traffic-analytics-across-edge-cloud-fabrics/)
+
+### 3rd Place in FinSurvival Challenge
+*6th ACM International Conference on AI in Finance (ICAIF)*, 2025
+- [Paper](https://finsurvival.github.io/papers/3_FinBoost.pdf)
+- [Code](https://github.com/manjilnepal/finboost)
+
+## Education
+
+### Bachelor of Technology (BTech) - SRM University-AP, India
+[Website](https://srmap.edu.in/)
+Duration: 2022-2026
+Department of Computer Science and Engineering
+
+## Projects
+
+### Flotilla — Federated Learning Framework
+Contributor, DREAM:Lab, Indian Institute of Science
+- [Code](https://github.com/dream-lab/flotilla)
+
+An extensible federated learning framework built for deployment across
+heterogeneous edge devices, from Raspberry Pis to GPU workstations to cloud
+VMs. Published in the *Journal of Parallel and Distributed Computing (JPDC)*, 2025.
+
+## Contact
+
+Email: manjil.nepal03 [AT] gmail.com
+GitHub: https://github.com/manjilnepal/
+Twitter: https://x.com/manjilnp
+Website: https://manjilnepal.github.io/
+</pre>
+
+  <div class="human-view" id="human-view">
 
   <!-- ── Header ── -->
   <header class="header">
     <div class="header-info">
       <p class="name">Manjil Nepal | मन्जिल नेपाल</p>
       <p>
-        Project Associate @
-        <a href="https://cds.iisc.ac.in/faculty/simmhan/">DREAM:Lab, Indian Institute of Science</a><br>
+        Research Associate @
+        <a href="https://cds.iisc.ac.in/faculty/simmhan/">DREAM:Lab, Indian Institute of Science</a>
+        <!-- <br>
         Senior Computer Science Student @
-        <a href="https://srmap.edu.in/">SRM University-AP, India</a>
+        <a href="https://srmap.edu.in/">SRM University-AP, India</a> -->
       </p>
       <div class="tags">
         <span class="tag">Federated Learning</span>
         <span class="tag">MLSys</span>
+        <!-- <span class="tag">Large Language Models</span> -->
         <span class="tag">Computer Vision</span>
       </div>
       <p class="links">
@@ -70,11 +180,21 @@
       </p>
     </div>
     <div class="header-photo">
-      <a href="gallery/dp.png">
-        <img alt="profile photo" src="gallery/dp.png">
+      <a href="gallery/dp_paint.jpg">
+        <img alt="profile photo" src="gallery/dp_paint.png">
       </a>
     </div>
   </header>
+
+  <!-- ── Research Interests ── -->
+  <section class="section">
+    <h2 id="interests">Research Interests</h2>
+    <p class="lede" id="interests-text">
+      I build systems for <strong>distributed machine learning</strong>, training AI models across many
+      machines rather than one. My work sits where the learning meets the machine: hardware ranging from
+      edge devices to server-grade clusters, and modalities spanning vision to natural language.
+    </p>
+  </section>
 
   <!-- ── Experience ── -->
   <section class="section">
@@ -183,9 +303,10 @@
     </div>
   </section>
 
-  <!-- ── Research ── -->
+  <!-- ── Publications ── -->
   <section class="section">
-    <h2 id="research">Research</h2>
+    <h2 id="research">Publications <a class="h2-note"
+        href="https://scholar.google.com/citations?user=DzORCCkAAAAJ&hl=en" target="_blank">(Google Scholar)</a></h2>
 
     <div class="paper">
       <div class="paper-img">
@@ -338,6 +459,22 @@
     </div>
   </section>
 
+  <!-- ── Education ── -->
+  <section class="section">
+    <h2 id="education">Education</h2>
+
+    <div class="edu">
+      <div class="edu-school">
+        <a href="https://srmap.edu.in/" target="_blank">SRM University-AP, India</a>
+      </div>
+      <div class="edu-line">
+        <span class="edu-degree">Bachelor of Technology (BTech)</span>
+        <span class="edu-date">2022 - 2026</span>
+      </div>
+      <div class="edu-dept">Department of Computer Science and Engineering</div>
+    </div>
+  </section>
+
   <!-- ── Projects ── -->
   <section class="section">
     <h2 id="projects">Projects</h2>
@@ -372,47 +509,7 @@
     </div>
   </section>
 
-  <!-- ── Miscellanea (hidden — remove this wrapper to restore) ──
-  <section class="section">
-    <h2 id="miscellanea">Miscellanea</h2>
-
-    <div class="entry">
-      <div class="entry-img">
-        <img src="experience/ntl-logo.png" alt="Next Tech Lab Logo" loading="lazy" style="width:60%">
-      </div>
-      <div class="entry-body">
-        <div class="entry-title">Next Tech Lab, AP, India</div>
-        <div class="entry-timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <div class="entry-title">Member &amp; Researcher</div>
-              <div class="entry-date">Oct 2024 - Present</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="entry">
-      <div class="entry-img">
-        <img src="misc/aiesec.png" alt="AIESEC Logo" loading="lazy" style="width:50%">
-      </div>
-      <div class="entry-body">
-        <div class="entry-title">AIESEC at Amaravati</div>
-        <div class="entry-timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <div class="entry-title">Senior Member</div>
-              <div class="entry-date">Mar 2025 - Aug 2025</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  ── -->
+  </div><!-- /.human-view -->
 
   <!-- ── Footer ── -->
   <footer class="footer">
@@ -427,6 +524,28 @@
   </footer>
 
   <script>
+    // Human / AI view toggle. AI mode shows the page as plain Markdown —
+    // the same content, in the form a language model would rather read.
+    // The rendered view is the default and lives in the markup, so the page
+    // is unaffected with JS disabled.
+    (function () {
+      var btn = document.getElementById('voice-toggle');
+      var label = document.getElementById('voice-label');
+      var human = document.getElementById('human-view');
+      var md = document.getElementById('md-view');
+      if (!btn || !human || !md) return;
+
+      btn.addEventListener('click', function () {
+        var toAI = btn.getAttribute('aria-checked') !== 'true';
+        btn.setAttribute('aria-checked', String(toAI));
+        human.hidden = toAI;
+        md.hidden = !toAI;
+        label.textContent = toAI ? 'AI' : 'Human';
+        btn.title = toAI ? 'View the rendered page' : 'View this page as Markdown';
+        window.scrollTo(0, 0);
+      });
+    })();
+
     (function () {
       var root = document.documentElement;
       var btn = document.getElementById('theme-toggle');
@@ -437,7 +556,7 @@
         var label = dark ? 'Switch to light theme' : 'Switch to dark theme';
         btn.setAttribute('aria-label', label);
         btn.setAttribute('title', label);
-        if (meta) meta.setAttribute('content', dark ? '#131313' : '#ffffff');
+        if (meta) meta.setAttribute('content', dark ? '#1a1918' : '#fdfbf7');
       }
 
       btn.addEventListener('click', function () {
