@@ -1,2 +1,13 @@
+# OS / editor
 .DS_Store
-archive
+.vscode/
+
+# Old version of the site, kept locally for reference
+archive/
+
+# Full-size source images. Pages use the compressed copies in assets/img/,
+# so these are kept locally but not published.
+assets/img/originals/
+
+# Images not referenced by any page
+assets/img/research/nlp.png

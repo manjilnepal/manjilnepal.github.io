@@ -1,36 +1,22 @@
 /* Fonts loaded via <link> in HTML for non-blocking parallel fetch */
 
 /* ── Design tokens ──
-   Palette derived from the oil-portrait in gallery/dp_paint.png — its ivory
-   ground (#e8ddc8), the charcoal of the suit (#343434) and the ochre of the
-   skin midtones (#c98d4e) — held back to a warm cast rather than a full
-   tint, so the page reads as paper rather than as coloured stock. */
+   Classic light academic palette: white page, black text, blue links that
+   turn orange on hover, neutral grey rules. The site is light-only. */
 :root {
-  --text: #2a2724;
-  --text-muted: #625a51;
-  --text-faint: #776e63;
-  --link: #7d5426;
-  --link-hover: #a4682a;
-  --rule: #e7e0d4;
-  --rule-soft: #efeae0;
-  --surface: #f7f3ec;
-  --bg: #fdfbf7;
-  --accent-strong: #a1402a;
-}
-
-/* Dark theme applies only on explicit opt-in via the toggle.
-   Light is the default regardless of system preference. */
-:root[data-theme="dark"] {
-  --text: #e8e3da;
-  --text-muted: #a9a196;
-  --text-faint: #8b8378;
-  --link: #d5a771;
-  --link-hover: #ecc699;
-  --rule: #34312d;
-  --rule-soft: #2b2825;
-  --surface: #232120;
-  --bg: #1a1918;
-  --accent-strong: #e08063;
+  color-scheme: light;
+  --text: #1a1a1a;
+  --text-muted: #4d4d4d;
+  --text-faint: #6b6b6b;
+  --link: #1772d0;
+  --link-hover: #f09228;
+  --rule: #e2e2e2;
+  --rule-soft: #eeeeee;
+  --surface: #f5f7fa;
+  --bg: #ffffff;
+  --accent-strong: #b42318;
+  --figure-bg: #ffffff;
+  --figure-filter: none;
 }
 
 /* ── Reset & Base ── */
@@ -40,11 +26,11 @@
   padding: 0;
 }
 
-/* ── Theme toggle ── */
-/* Fixed corner stack holding the page-level controls. Individual buttons
+/* ── Page controls ── */
+/* Corner stack holding the page-level controls. Individual buttons
    are static within it, so adding another does not need new coordinates. */
 .controls {
-  position: fixed;
+  position: absolute;
   top: 16px;
   right: 16px;
   z-index: 10;
@@ -72,8 +58,8 @@
 }
 
 /* ── Human / AI voice toggle ── */
-/* Reads as one pill: label and track share a dark capsule, matching the
-   theme toggle's height so the two controls sit on a common baseline. */
+/* Reads as one pill: label and track share a light capsule, sized to sit in
+   the fixed corner controls. */
 .voice-toggle {
   display: flex;
   align-items: center;
@@ -85,17 +71,10 @@
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
-  color: #f4f1ec;
-  background: #191817;
-  border: 1px solid #191817;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--rule);
   border-radius: 999px;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-:root[data-theme="dark"] .voice-toggle {
-  color: #1a1918;
-  background: #e8e3da;
-  border-color: #e8e3da;
 }
 
 .voice-toggle:focus-visible {
@@ -116,12 +95,7 @@
   width: 34px;
   height: 19px;
   border-radius: 999px;
-  background: #4a4744;
-  transition: background 0.2s ease;
-}
-
-:root[data-theme="dark"] .voice-track {
-  background: #b3aca1;
+  background: #c9ced6;
 }
 
 .voice-thumb {
@@ -131,8 +105,8 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #fdfbf7;
-  transition: transform 0.2s ease;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 /* Checked = AI voice: thumb travels the track's inner width. */
@@ -142,76 +116,6 @@
 
 .voice-toggle[aria-checked="true"] .voice-thumb {
   transform: translateX(15px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .voice-thumb,
-  .voice-track {
-    transition: none;
-  }
-}
-
-.theme-toggle {
-  flex-shrink: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  font: inherit;
-  line-height: 1;
-  cursor: pointer;
-  /* Same capsule colours as the voice toggle so the pair reads as one
-     control set; the icon inverts with it to stay legible. */
-  color: #f4f1ec;
-  background: #191817;
-  border: 1px solid #191817;
-  border-radius: 50%;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-}
-
-:root[data-theme="dark"] .theme-toggle {
-  color: #1a1918;
-  background: #e8e3da;
-  border-color: #e8e3da;
-}
-
-.theme-toggle:hover {
-  background: #2b2927;
-  border-color: #2b2927;
-}
-
-:root[data-theme="dark"] .theme-toggle:hover {
-  background: #f4f1ec;
-  border-color: #f4f1ec;
-}
-
-.theme-toggle:focus-visible {
-  outline: 2px solid var(--link);
-  outline-offset: 2px;
-}
-
-.theme-toggle svg {
-  width: 15px;
-  height: 15px;
-  display: block;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Show the icon for the theme you'd switch TO */
-.theme-toggle .icon-moon { display: block; }
-.theme-toggle .icon-sun { display: none; }
-
-:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
-:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -231,7 +135,6 @@ body {
 a {
   color: var(--link);
   text-decoration: none;
-  transition: color 0.15s ease;
 }
 
 a:focus,
@@ -296,6 +199,17 @@ strong {
   margin-bottom: 4px;
 }
 
+/* Short bio under the role line. Left-aligned for reading, unlike the
+   centred name and links around it. */
+.header-info > p.header-bio {
+  margin: 12px 0 14px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  text-wrap: pretty;
+}
+
 .header-photo {
   flex-shrink: 0;
   width: 28%;
@@ -311,7 +225,6 @@ strong {
   border-radius: 50%;
   display: block;
   box-shadow: 0 0 0 1px var(--rule), 0 0 0 6px var(--bg), 0 0 0 7px var(--rule-soft);
-  transition: box-shadow 0.25s ease;
 }
 
 .header-photo a:hover img {
@@ -385,16 +298,45 @@ strong {
   align-items: flex-start;
 }
 
+/* Logo tiles: one square white plate per organisation, matching the
+   figure plates below. Logos arrive as transparent PNGs, padded squares
+   and full-bleed marks, so the tile, not the file, sets the size; the
+   white ground also keeps dark-on-transparent logos visible. */
 .entry-img {
   flex-shrink: 0;
-  width: 18%;
-  padding-top: 4px;
-  text-align: center;
+  width: 125px;
+  height: 125px;
+  margin-top: 2px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--figure-bg);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .entry-img img {
-  max-width: 120px;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: var(--figure-filter);
+}
+
+/* Logo file carries a wide transparent margin: enlarge to match the others */
+.entry-img.logo-zoom img {
+  transform: scale(1.3);
+}
+
+/* Square mark designed to be shown edge to edge, like an app icon */
+.entry-img.logo-fill {
+  padding: 0;
+}
+
+.entry-img.logo-fill img {
+  object-fit: cover;
 }
 
 .entry-body {
@@ -585,18 +527,6 @@ strong {
   color: var(--text-muted);
 }
 
-.project-tags {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 6px 0 4px;
-}
-
-.project-tags .tag {
-  font-size: 13px;
-  padding: 2px 8px;
-}
-
 /* ── Paper cards ── */
 .paper {
   display: flex;
@@ -617,11 +547,150 @@ strong {
   display: block;
   border-radius: 4px;
   border: 1px solid var(--rule-soft);
-  transition: border-color 0.2s ease;
 }
 
 .paper:hover .paper-img img {
   border-color: var(--rule);
+}
+
+/* Figure plates (Publications, Achievements): every image sits on the same
+   white plate, letterboxed with object-fit so a 3:1 system diagram and a 1:1
+   logo read at the same visual weight. The plate is white
+   because the images themselves are drawn on white. */
+.figures .paper-img {
+  width: 220px;
+  aspect-ratio: 3 / 2;
+  margin-top: 4px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--figure-bg);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.figures .paper-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  filter: var(--figure-filter);
+}
+
+/* Achievement logos carry their own generous white margin */
+.achievements .paper-img {
+  padding: 4px;
+}
+
+/* Project artwork is an illustration, not a diagram: give it room. */
+.projects .paper-img {
+  padding: 18px;
+}
+
+.publications .paper-img {
+  cursor: zoom-in;
+}
+
+/* Small "expand" glyph so the plate reads as clickable */
+.publications .paper-img::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'/%3E%3C/svg%3E") center / 13px no-repeat;
+  opacity: 0;
+}
+
+.publications .paper-img:hover,
+.publications .paper-img:focus-visible {
+  border-color: var(--text-faint);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.publications .paper-img:hover::after,
+.publications .paper-img:focus-visible::after {
+  opacity: 1;
+}
+
+.publications .paper-img:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+}
+
+/* ── Figure lightbox ── */
+.lightbox {
+  max-width: min(1200px, 94vw);
+  max-height: 92vh;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.lightbox::backdrop {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(3px);
+}
+
+.lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(92vh - 64px);
+  margin: 0 auto;
+  padding: 16px;
+  background: var(--figure-bg);
+  filter: var(--figure-filter);
+  cursor: zoom-out;
+}
+
+.lightbox-caption {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--rule);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.lightbox-caption span {
+  flex: 1;
+  min-width: 0;
+}
+
+.lightbox-close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  font: inherit;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.lightbox-close:hover {
+  color: var(--text);
+  border-color: var(--text-faint);
+}
+
+.lightbox-close:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
 }
 
 .paper-body {
@@ -631,10 +700,18 @@ strong {
   line-height: 1.55;
 }
 
+/* Titles read as headings, not links: same dark ink whether or not the
+   paper has a URL yet, turning blue only on hover when it does. */
 .papertitle {
   font-size: 18px;
   font-weight: 700;
   line-height: 1.35;
+  color: var(--text);
+}
+
+a:hover .papertitle,
+a:focus-visible .papertitle {
+  color: var(--link);
 }
 
 .paper-body em {
@@ -646,30 +723,19 @@ strong {
   font-weight: 700;
 }
 
-/* Author list: make own name stand out without shouting */
+/* Conference tier badge shown beside the venue */
+.venue-rank {
+  color: var(--accent-strong);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* Author list: own name set in Lato Black so it stands out by weight alone */
 .paper-body > strong {
   color: var(--text);
-}
-
-/* ── Research interest tags ── */
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  justify-content: center;
-  margin: 10px 0 4px;
-}
-
-.tag {
-  display: inline-block;
-  padding: 3px 11px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 100px;
-  letter-spacing: 0.2px;
+  font-weight: 900;
 }
 
 /* ── Collapsible abstracts ── */
@@ -708,7 +774,6 @@ details summary::before {
   color: var(--text-muted);
   font-weight: 400;
   flex-shrink: 0;
-  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 
 details summary:focus-visible {
@@ -740,6 +805,209 @@ details p {
   hyphens: auto;
 }
 
+/* ── Back to top ── */
+.to-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 6;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.to-top[hidden] {
+  display: none;
+}
+
+.to-top:hover {
+  color: var(--link);
+  border-color: var(--link);
+}
+
+.to-top svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Recent news ── */
+/* Compact, scannable rows: a date and one sentence. The box is sized (in
+   home.js) to show exactly the five newest; the rest scroll. */
+.news {
+  position: relative;
+  margin-top: 4px;
+}
+
+.news-viewport {
+  max-height: 210px; /* fallback; home.js fits it to five entries */
+  overflow-y: auto;
+  padding-right: 14px;
+  overscroll-behavior: contain;
+}
+
+.news-viewport:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Always-visible scrollbar, so it is obvious the list holds more. Custom
+   ::-webkit-scrollbar styles opt out of macOS's auto-hiding overlay bars in
+   Chrome and Safari; the standard properties are left to Firefox only,
+   because Chrome lets them override (and so disable) the custom bar. */
+.news-viewport::-webkit-scrollbar {
+  width: 8px;
+}
+
+.news-viewport::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.news-viewport::-webkit-scrollbar-thumb {
+  background: #b9bec6;
+  border-radius: 8px;
+}
+
+.news-viewport::-webkit-scrollbar-thumb:hover {
+  background: #8f959e;
+}
+
+@supports (-moz-appearance: none) {
+  .news-viewport {
+    scrollbar-width: thin;
+    scrollbar-color: #b9bec6 var(--surface);
+  }
+}
+
+.news-list {
+  list-style: none;
+}
+
+/* Date in a fixed column so the sentences start on one straight edge. */
+.news-item {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  column-gap: 14px;
+  align-items: baseline;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.news-date {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+
+.news-text {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* Newest entry: a soft highlight and a blue date led by a dot.
+   Keyed to :first-child, so adding an item at the top moves it along. */
+.news-item:first-child {
+  background: #f0f6fd;
+}
+
+.news-item:first-child .news-date {
+  color: var(--link);
+}
+
+.news-item:first-child .news-date::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 6px;
+  vertical-align: 1px;
+  border-radius: 50%;
+  background: var(--link);
+}
+
+/* ── Sub-page nav ── */
+/* Breadcrumb at the top of secondary pages (miscellaneous/index.html). Padded
+   on the right so it never runs under the fixed corner controls. */
+.page-nav {
+  display: flex;
+  gap: 8px;
+  padding: 22px 56px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-faint);
+}
+
+.page-nav [aria-current="page"] {
+  color: var(--text);
+}
+
+/* ── Miscellaneous entries ── */
+.misc-item {
+  display: flex;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  align-items: flex-start;
+}
+
+.misc-item:last-child {
+  border-bottom: none;
+}
+
+.misc-img {
+  flex-shrink: 0;
+  width: 170px;
+}
+
+.misc-img img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid var(--rule-soft);
+}
+
+.misc-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.misc-title {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+span.misc-title {
+  color: var(--text);
+}
+
+.misc-date {
+  font-size: 14px;
+  color: var(--text-faint);
+}
+
+.misc-body p {
+  margin-top: 6px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
 /* ── Footer ── */
 .footer {
   display: flex;
@@ -753,7 +1021,6 @@ details p {
 
 .footer-flag {
   opacity: 0.85;
-  transition: opacity 0.2s;
 }
 
 .footer-flag:hover {
@@ -763,16 +1030,6 @@ details p {
 .footer-flag img {
   display: block;
   border-radius: 4px;
-}
-
-/* The counter image is served with a baked-in white background, so it
-   can't follow the theme — dim it instead of showing a white block. */
-:root[data-theme="dark"] .footer-flag {
-  opacity: 0.6;
-}
-
-:root[data-theme="dark"] .footer-flag:hover {
-  opacity: 0.85;
 }
 
 .footer-credit {
@@ -808,8 +1065,8 @@ details p {
   }
 
   .entry-img {
-    width: 60%;
-    padding-top: 0;
+    width: 115px;
+    height: 115px;
     margin: 0 auto;
   }
 
@@ -839,8 +1096,43 @@ details p {
     margin: 0 auto;
   }
 
+  /* Full-width plates: let height follow the figure instead of
+     letterboxing wide diagrams into a mostly empty 3:2 box. Logos
+     stay boxed and modest, since full width would dwarf the text. */
+  .achievements .paper-img,
+  .projects .paper-img {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  /* Full-width plates: let height follow the figure instead of
+     letterboxing wide diagrams into a mostly empty 3:2 box. */
+  .publications .paper-img {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+  }
+
+  .publications .paper-img img {
+    height: auto;
+  }
+
   details p {
     text-align: left;
+  }
+
+  .news-item {
+    grid-template-columns: 1fr;
+    padding: 7px 10px;
+  }
+
+  .misc-item {
+    flex-direction: column;
+  }
+
+  .misc-img {
+    width: 100%;
+    max-width: 280px;
   }
 }
 
@@ -861,7 +1153,9 @@ details p {
   }
 
   .footer-flag,
-  .theme-toggle {
+  .to-top,
+  .controls,
+  .lightbox {
     display: none;
   }
 }
