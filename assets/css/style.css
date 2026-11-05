@@ -920,17 +920,17 @@ details p {
   color: var(--text);
 }
 
-/* Newest entry: a soft highlight and a blue date led by a dot.
-   Keyed to :first-child, so adding an item at the top moves it along. */
-.news-item:first-child {
+/* New entries: a soft highlight and a blue date led by a dot.
+   Add class="news-item is-new" to mark an item; remove it when it ages out. */
+.news-item.is-new {
   background: #f0f6fd;
 }
 
-.news-item:first-child .news-date {
+.news-item.is-new .news-date {
   color: var(--link);
 }
 
-.news-item:first-child .news-date::before {
+.news-item.is-new .news-date::before {
   content: "";
   display: inline-block;
   width: 7px;
