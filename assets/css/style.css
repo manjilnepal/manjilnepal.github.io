@@ -1,22 +1,26 @@
 /* Fonts loaded via <link> in HTML for non-blocking parallel fetch */
 
 /* ── Design tokens ──
-   Classic light academic palette: white page, black text, blue links that
-   turn orange on hover, neutral grey rules. The site is light-only. */
+   Light academic palette: white page, black text, ocean-teal links that
+   turn coral on hover, neutral grey rules. The site is light-only. */
 :root {
   color-scheme: light;
   --text: #1a1a1a;
   --text-muted: #4d4d4d;
   --text-faint: #6b6b6b;
-  --link: #1772d0;
-  --link-hover: #f09228;
+  --link: #0d8073;
+  --link-hover: #e5603f;
   --rule: #e2e2e2;
   --rule-soft: #eeeeee;
-  --surface: #f5f7fa;
+  --surface: #f4f8f7;
   --bg: #ffffff;
-  --accent-strong: #b42318;
+  --accent-strong: #b54708;
   --figure-bg: #ffffff;
   --figure-filter: none;
+  /* Source Serif for the name, section headings and titles; Inter for
+     reading. Noto Serif Devanagari covers the Nepali half of the name. */
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-display: 'Source Serif 4', 'Noto Serif Devanagari', Georgia, 'Times New Roman', serif;
 }
 
 /* ── Reset & Base ── */
@@ -119,8 +123,9 @@
 }
 
 body {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 17px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  letter-spacing: -0.005em;
   line-height: 1.65;
   color: var(--text);
   background: var(--bg);
@@ -149,10 +154,11 @@ a:focus-visible {
 }
 
 h2 {
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 600;
   font-size: 20px;
   margin: 0;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text);
 }
@@ -166,10 +172,11 @@ strong {
   margin: 0 0 10px;
   /* Scales with viewport so the Devanagari half never collides
      with the profile photo at mid widths. */
+  font-family: var(--font-display);
   font-size: clamp(26px, 4.1vw, 35px);
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
   line-height: 1.2;
   text-wrap: balance;
   color: var(--text);
@@ -350,8 +357,9 @@ strong {
 }
 
 .entry-title {
+  font-family: var(--font-display);
   font-size: 19px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.35;
 }
 
@@ -703,8 +711,9 @@ strong {
 /* Titles read as headings, not links: same dark ink whether or not the
    paper has a URL yet, turning blue only on hover when it does. */
 .papertitle {
+  font-family: var(--font-display);
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.35;
   color: var(--text);
 }
@@ -732,7 +741,7 @@ a:focus-visible .papertitle {
   white-space: nowrap;
 }
 
-/* Author list: own name set in Lato Black so it stands out by weight alone */
+/* Author list: own name set in Inter Black so it stands out by weight alone */
 .paper-body > strong {
   color: var(--text);
   font-weight: 900;
@@ -920,10 +929,10 @@ details p {
   color: var(--text);
 }
 
-/* New entries: a soft highlight and a blue date led by a dot.
+/* New entries: a soft highlight and a teal date led by a dot.
    Add class="news-item is-new" to mark an item; remove it when it ages out. */
 .news-item.is-new {
-  background: #f0f6fd;
+  background: #e8f6f3;
 }
 
 .news-item.is-new .news-date {
@@ -988,8 +997,9 @@ details p {
 }
 
 .misc-title {
-  font-weight: 700;
-  font-size: 17px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
 }
 
 span.misc-title {
