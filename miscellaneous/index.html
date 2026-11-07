@@ -25,30 +25,58 @@
     <span aria-current="page">Miscellaneous</span>
   </nav>
 
-  <section class="section">
-    <h2>Miscellaneous</h2>
-    <p class="lede">Life outside research: trips, people, things I&#8217;ve been part of, and anything else that
-      doesn&#8217;t fit elsewhere.</p>
+  <!--
+    To add an entry to any section, copy this block. The image is optional;
+    drop the .misc-img element entirely for a text-only entry. Images live in
+    assets/img/misc/.
 
-    <!--
-      To add an entry, copy this block. The image is optional; drop the
-      .misc-img element entirely for a text-only entry. Images live in misc/.
+  <div class="misc-item">
+    <div class="misc-img">
+      <img src="../assets/img/misc/your-photo.jpg" alt="Short description" loading="lazy">
+    </div>
+    <div class="misc-body">
+      <a class="misc-title" href="#">Title of the thing</a>
+      <div class="misc-date">Month Year</div>
+      <p>A few sentences about it.</p>
+    </div>
+  </div>
+  -->
+
+  <!-- ── CS deadlines ── -->
+  <section class="section" id="deadlines">
+    <h2>CS Conference Deadlines</h2>
 
     <div class="misc-item">
-      <div class="misc-img">
-        <img src="../assets/img/misc/your-photo.jpg" alt="Short description" loading="lazy">
-      </div>
       <div class="misc-body">
-        <a class="misc-title" href="#">Title of the thing</a>
-        <div class="misc-date">Month Year</div>
-        <p>A few sentences about it.</p>
+        <a class="misc-title" href="deadlines/">Upcoming paper deadlines, by area</a>
+        <div class="misc-date">Kept up to date</div>
+        <p>Machine learning, computer vision, NLP, ML systems, HPC and edge computing venues: a year-at-a-glance
+          calendar and every conference&#8217;s next deadline, filterable by domain.</p>
       </div>
     </div>
-    -->
+  </section>
+
+  <!-- ── From the Timeline ── -->
+  <section class="section" id="timeline">
+    <h2>From the Timeline</h2>
 
     <div class="misc-item">
       <div class="misc-body">
-        <span class="misc-title">Talk: Accelerating LLM Inference with Speculative Decoding at the Edge</span>
+        <a class="misc-title" href="timeline/">Funny and interesting posts, by conference</a>
+        <div class="misc-date">Ongoing since November 2026</div>
+        <p>Reviewer horror stories, sharp analyses and the occasional perfect meme from X and LinkedIn, sorted
+          by conference.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Talks ── newest first -->
+  <section class="section" id="talks">
+    <h2>Talks</h2>
+
+    <div class="misc-item">
+      <div class="misc-body">
+        <span class="misc-title">Accelerating LLM Inference with Speculative Decoding at the Edge</span>
         <div class="misc-date">November 2026 &middot; PyTorch Community Nepal (online)</div>
         <a href="../data/talks/speculative-decoding-pytorch-nepal.pdf" target="_blank">slides</a>
         /
