@@ -529,6 +529,54 @@ strong {
   color: var(--text-muted);
 }
 
+/* Thesis: a thin rule, a small label, the title in the paper-title face,
+   and the venue as one muted line. */
+.thesis {
+  margin-top: 12px;
+  padding: 1px 0 2px 14px;
+  border-left: 2px solid #9fcfc8;
+}
+
+.thesis-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.thesis-title {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.thesis-title:hover,
+.thesis-title:focus-visible {
+  color: var(--link);
+}
+
+.thesis-venue {
+  margin-top: 3px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.thesis-venue .nowrap {
+  white-space: nowrap;
+}
+
+/* Leave room above the card when the thesis link jumps to it. */
+#quality-judges {
+  scroll-margin-top: 24px;
+}
+
 /* ── Project meta line ── */
 .project-meta {
   font-size: 15px;
